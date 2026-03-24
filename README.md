@@ -45,7 +45,7 @@ Switch to the **Ledger** tab to see payments in real-time. Switch to **Audit Tra
 Install directly from GitHub into any OpenClaw instance:
 
 ```
-openclaw skills add https://github.com/icerven/naturalclaw
+openclaw skills add https://github.com/CerIsaiah/natural_show
 ```
 
 The `SKILL.md` follows the AgentSkills spec with proper YAML frontmatter and metadata gating:
@@ -90,4 +90,4 @@ This project demonstrates that I understand both the infrastructure (Natural's A
 
 ---
 
-Built by [@icerven](https://github.com/icerven)
+Repo: [github.com/CerIsaiah/natural_show](https://github.com/CerIsaiah/natural_show)
