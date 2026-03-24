@@ -1,0 +1,40 @@
+name: property-payment-workflow
+description: >
+  Automated property management payment flow.
+  Processes vendor and contractor payments on behalf of property managers
+  using Natural's agentic payments infrastructure.
+trigger: manual
+
+steps:
+  - id: fetch_customers
+    action: natural.list_customers
+    description: Retrieve all property managers who delegated payment authority
+
+  - id: check_pending_invoices
+    action: prompt
+    input: |
+      Review the following customers and identify any pending invoices
+      that need to be paid today: {{ steps.fetch_customers.output }}
+
+  - id: verify_balances
+    action: natural.check_balance
+    for_each: "{{ steps.check_pending_invoices.output.customers }}"
+    input:
+      party_id: "{{ item.party_id }}"
+
+  - id: process_payments
+    action: natural.create_payment
+    for_each: "{{ steps.check_pending_invoices.output.invoices }}"
+    condition: "{{ item.customer_balance >= item.amount }}"
+    input:
+      recipient: "{{ item.contractor_email }}"
+      amount: "{{ item.amount }}"
+      customer_party_id: "{{ item.customer_party_id }}"
+      memo: "{{ item.description }}"
+      idempotency_key: "{{ item.invoice_id }}"
+
+  - id: notify
+    action: prompt
+    input: |
+      Summarize the payment results and notify the property manager:
+      Processed: {{ steps.process_payments.output }}

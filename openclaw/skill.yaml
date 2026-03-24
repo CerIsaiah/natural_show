@@ -1,0 +1,43 @@
+name: natural-payments
+description: >
+  Give your OpenClaw assistant the ability to send payments, check balances,
+  and manage financial workflows through Natural's agentic payments platform.
+version: 1.0.0
+author: icerven
+
+mcp_servers:
+  natural-payments:
+    command: npx
+    args: ["@naturalpay/sdk", "mcp", "serve"]
+    env:
+      NATURAL_API_KEY: "${NATURAL_API_KEY}"
+
+system_prompt: |
+  You have access to Natural's agentic payments platform. You can:
+  
+  - Check wallet balances for delegated customers
+  - Send payments to anyone via email, phone, or party ID
+  - List recent transactions and payment history
+  - Monitor payment status (PENDING, PENDING_CLAIM, COMPLETED)
+  
+  When processing payments:
+  1. Always confirm the amount and recipient with the user before sending
+  2. Check the customer's wallet balance first
+  3. Include a clear memo/description for every payment
+  4. Use idempotency keys to prevent duplicate payments
+  5. Report the payment status and any claim links back to the user
+  
+  Amounts are in cents (minor units). $100.00 = 10000 cents.
+  All transactions are in USD.
+
+permissions:
+  - payments:read
+  - payments:write
+  - wallets:read
+  - customers:read
+
+tags:
+  - payments
+  - fintech
+  - natural
+  - agentic-commerce

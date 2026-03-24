@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Isaiah Cerven — Natural + OpenClaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050507; --bg-el: #0c0c10; --bg-card: #111116; --border: #1e1e26;
+      --text: #f4f4f5; --text-m: #a1a1aa; --text-d: #63637a;
+      --green: #22c55e; --blue: #3b82f6; --purple: #a855f7;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; }
+    a { color:var(--green); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    code { font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg-card); padding:2px 6px; border-radius:4px; border:1px solid var(--border); }
+    .wrap { max-width:700px; margin:0 auto; padding:60px 24px 80px; }
+    nav { display:flex; align-items:center; gap:12px; margin-bottom:56px; }
+    nav .logo-mark { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,var(--green),var(--blue)); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:#000; }
+    nav span { font-weight:600; font-size:15px; }
+    nav .right { margin-left:auto; font-size:13px; padding:6px 16px; border:1px solid var(--border); border-radius:8px; color:var(--text-m); }
+    nav .right:hover { border-color:var(--green); color:var(--green); text-decoration:none; }
+    h1 { font-size:36px; font-weight:800; letter-spacing:-0.03em; line-height:1.2; margin-bottom:24px; }
+    h1 .gr { background:linear-gradient(135deg,var(--green),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .intro { font-size:17px; color:var(--text-m); margin-bottom:40px; line-height:1.8; }
+    .intro strong { color:var(--text); }
+    h2 { font-size:20px; font-weight:700; letter-spacing:-0.01em; margin:44px 0 14px; }
+    p, li { color:var(--text-m); font-size:15px; margin-bottom:12px; }
+    ul { padding-left:20px; }
+    li { margin-bottom:10px; }
+    li strong { color:var(--text); }
+    .divider { border:none; border-top:1px solid var(--border); margin:44px 0; }
+    .terminal { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:20px 0; }
+    .terminal-bar { display:flex; align-items:center; padding:10px 14px; background:var(--bg-el); border-bottom:1px solid var(--border); gap:6px; }
+    .dot { width:9px; height:9px; border-radius:50%; }
+    .dot.r { background:#ff5f57; } .dot.y { background:#febc2e; } .dot.g { background:#28c840; }
+    .terminal pre { padding:14px 18px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.8; color:var(--text-m); overflow-x:auto; }
+    .terminal .pr { color:var(--green); }
+    .terminal .dm { color:var(--text-d); }
+    .terminal .hl { color:var(--text); }
+    .card-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0 28px; }
+    .card { background:var(--bg-el); border:1px solid var(--border); border-radius:12px; padding:20px; }
+    .card .num { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--green); font-weight:600; margin-bottom:6px; }
+    .card h4 { font-size:14px; font-weight:600; margin-bottom:6px; }
+    .card p { font-size:13px; margin-bottom:0; }
+    .cta { display:inline-block; margin-top:20px; padding:12px 28px; background:var(--green); color:#000; font-weight:700; font-size:14px; border-radius:10px; }
+    .cta:hover { opacity:0.9; text-decoration:none; }
+    .footer { color:var(--text-d); font-size:13px; text-align:center; margin-top:48px; }
+    @media(max-width:600px) { h1 { font-size:26px; } .card-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="logo-mark">N</div>
+    <span>NaturalClaw</span>
+    <a href="/" class="right">Try the Demo →</a>
+  </nav>
+
+  <h1>Hey, I'm <span class="gr">Isaiah Cerven</span></h1>
+
+  <div class="intro">
+    I'm a developer who cares about payments, agents, and shipping real things. I put this site together for <a href="https://natural.co">Natural</a> — to show what I can build and why I'd love to be part of what you're doing.
+  </div>
+
+  <h2>About me</h2>
+  <p>I've been an entrepreneur for as long as I can remember. I've worked with agencies on <strong>B2B</strong> projects, and I built my own <strong>consumer startup</strong> and grew it to <strong>3,000+ users</strong>. That mix — selling to businesses, running a product people actually use — shaped how I think about product and execution.</p>
+  <p>For the past <strong>year</strong> I've been at <strong>Mastercard</strong>, in <strong>Networks clearing</strong>, where I work on <strong>end-to-end payment processing</strong> — how money actually moves through the network. Sitting in that world, what <a href="https://natural.co">Natural</a> is building feels especially relevant: the same primitives I see every day (limits, risk, trust, settlement) are exactly what agentic payments need, just redesigned for software that acts on its own.</p>
+  <p>I built <strong>NaturalClaw</strong> because I wanted something concrete — not a pitch deck — that shows my passion for what Natural can unlock and why, as a developer, <strong>I'd love to be involved</strong> with the company.</p>
+
+  <h2>OpenClaw</h2>
+  <p>I've been using <strong>OpenClaw</strong> a lot lately: as a generator for <strong>marketing</strong>, for <strong>creating videos</strong>, and for experimenting with <strong>UGC</strong> and creative workflows. I'm comfortable living in that ecosystem, which is why a Natural payment skill for OpenClaw felt like the right shape for this demo — something people can actually install and use.</p>
+
+  <h2>What this project is</h2>
+  <p>This is my take on <strong>how OpenClaw and Natural fit together</strong>. OpenClaw already runs a lot of real assistant workflows — but moving money is still a gap for most setups. Natural is the infrastructure that closes it, with delegation, limits, and compliance built in. The flow here is: <strong>natural language → tool calls → balance checks → payment</strong>, with a ledger and audit trail so you can see the whole story.</p>
+  <p>It has two layers: an <strong>installable OpenClaw skill</strong> (real <code>SKILL.md</code>, real tool handlers against Natural's API) and a <strong>live web demo</strong> so anyone can try the agent flow without a key.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="num">01</div>
+      <h4>OpenClaw Payment Skill</h4>
+      <p>An installable skill that connects any OpenClaw assistant to Natural's payment API. 5 tools, proper SKILL.md format, zero dependencies. Set a key and go.</p>
+    </div>
+    <div class="card">
+      <div class="num">02</div>
+      <h4>Live Agent Demo</h4>
+      <p>An interactive agent you can chat with — real-time tool calls, a live ledger, and a full audit trail. Shows the payment flow from natural language to execution.</p>
+    </div>
+    <div class="card">
+      <div class="num">03</div>
+      <h4>Payment Orchestration Engine</h4>
+      <p>A custom-built ledger with delegation enforcement, per-transaction and daily spending limits, idempotency, and duplicate detection. Built from scratch.</p>
+    </div>
+    <div class="card">
+      <div class="num">04</div>
+      <h4>Agent Tool Interface</h4>
+      <p>Natural language parsing that extracts amounts, recipients, and memos from messy input. The agent decides which tools to call and in what order.</p>
+    </div>
+  </div>
+
+  <h2>How the agent flow works</h2>
+  <p>This is what I think the payment UX should look like when agents are the interface:</p>
+
+  <div class="terminal">
+    <div class="terminal-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <pre><span class="hl">User:</span>  pay terri 500 for fixing the bathroom sink
+
+<span class="hl">Agent:</span> <span class="dm">→ Checking balance for Bruce Property Management...</span>
+       <span class="dm">→ Balance: $12,500.00 available</span>
+       <span class="dm">→ Sending $500 to terri@plumbingworks.com...</span>
+       <span class="dm">→ Payment created: pay_a8f3k2m1 (PENDING)</span>
+
+       <span class="pr">✓ Sent $500.00 to Terri</span>
+       <span class="pr">  Memo: fixing the bathroom sink</span>
+       <span class="pr">  Status: PENDING</span>
+
+<span class="hl">User:</span>  pay terri 500 for the bathroom again
+
+<span class="hl">Agent:</span> <span class="dm">→ ⚠️ Duplicate detected: similar payment to Terri in the last hour</span>
+       <span class="dm">→ Proceeding with warning...</span>
+
+<span class="hl">User:</span>  pay jake 10000 for the full rewire
+
+<span class="hl">Agent:</span> <span class="dm">→ ❌ Blocked: $10,000 exceeds per-transaction limit ($5,000)</span>
+       <span class="dm">→ Payment not sent. Ask the business to raise the limit.</span></pre>
+  </div>
+
+  <p>The agent checks balance before sending, enforces spending limits, flags likely duplicates, and returns clear status. Everything is logged — the kind of observability you'd want for real money movement.</p>
+
+  <h2>You can use this in OpenClaw today</h2>
+  <p>If you run OpenClaw, add the skill and set your Natural API key — it talks to <code>api.natural.co</code> with the right JSON:API shape and idempotency headers:</p>
+
+  <div class="terminal">
+    <div class="terminal-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <pre><span class="pr">$</span> openclaw skills add https://github.com/icerven/naturalclaw
+
+<span class="dm">Installing natural-payments...</span>
+<span class="dm">Found SKILL.md with 5 tools</span>
+<span class="dm">✓ Installed.</span>
+
+<span class="pr">$</span> /secrets set NATURAL_API_KEY sk_ntl_sandbox_your_key</pre>
+  </div>
+
+  <p>The handlers use Node's built-in <code>fetch</code> — no extra dependencies. With a valid key, you're on the real API.</p>
+
+  <hr class="divider" />
+
+  <h2>I'd love to talk</h2>
+  <p>If you're hiring and want someone who combines <strong>payments depth</strong> (network clearing, how processing actually works) with an <strong>agentic / AI-focused</strong> mindset and a habit of <strong>shipping</strong>, I'd be excited to have a conversation. This project is my way of starting that dialogue — not with slides, but with something you can click through and install.</p>
+
+  <a href="/" class="cta">Try the Live Demo</a>
+
+  <p class="footer">
+    Isaiah Cerven · <a href="/">Demo</a> · <a href="https://natural.co">natural.co</a> · <a href="https://github.com/icerven/naturalclaw">GitHub</a>
+  </p>
+</div>
+</body>
+</html>

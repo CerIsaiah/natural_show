@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "natural-payments": {
+      "command": "npx",
+      "args": ["@naturalpay/sdk", "mcp", "serve"],
+      "env": {
+        "NATURAL_API_KEY": "sk_ntl_sandbox_..."
+      }
+    }
+  }
+}

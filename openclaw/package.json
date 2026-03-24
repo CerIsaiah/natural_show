@@ -1,0 +1,14 @@
+{
+  "name": "natural-payments",
+  "version": "1.0.0",
+  "description": "OpenClaw skill — agentic payments via Natural",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "postinstall": "echo '✓ Set NATURAL_API_KEY to activate: /secrets set NATURAL_API_KEY sk_ntl_sandbox_...'"
+  },
+  "keywords": ["openclaw", "natural", "payments", "agentic"],
+  "license": "MIT"
+}

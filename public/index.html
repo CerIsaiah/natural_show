@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NaturalClaw — Agentic Payment Orchestration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="gradient-orb orb-1"></div>
+  <div class="gradient-orb orb-2"></div>
+
+  <!-- ───── HEADER ───── -->
+  <header class="topbar">
+    <div class="logo">
+      <div class="logo-mark">N</div>
+      <span>NaturalClaw</span>
+    </div>
+    <div class="topbar-tabs">
+      <button class="topbar-tab active" data-view="agent">Agent</button>
+      <button class="topbar-tab" data-view="ledger">Ledger</button>
+      <button class="topbar-tab" data-view="audit">Audit Trail</button>
+      <button class="topbar-tab" data-view="skill">Skill</button>
+    </div>
+    <div class="topbar-right">
+      <a href="/about" class="about-link">About Me</a>
+      <span class="env-badge">SANDBOX</span>
+    </div>
+  </header>
+
+  <!-- ───── AGENT VIEW ───── -->
+  <main id="view-agent" class="view active">
+    <div class="agent-layout">
+      <!-- Chat -->
+      <div class="panel chat-panel">
+        <div class="panel-header">
+          <div class="panel-dot green"></div>
+          <span>Payment Agent</span>
+          <span class="panel-tag">LIVE</span>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg agent">
+            <div class="sender">Agent</div>
+            <div>I'm a payment agent. Type naturally — I'll figure out the rest.<br><br>
+            <strong>Try any of these:</strong><br>
+            <code>pay mike 200 for plumbing</code><br>
+            <code>send terri $500 for the bathroom repair</code><br>
+            <code>check my balance</code><br>
+            <code>show recent transactions</code><br>
+            <code>list my customers</code><br><br>
+            <span style="color:var(--text-d)">I parse natural language, extract amounts/recipients/memos, check balances, enforce spending limits, and log everything to an audit trail.</span></div>
+          </div>
+        </div>
+        <form class="chat-input-area" id="chatForm">
+          <input type="text" id="chatInput" placeholder="Type a payment command..." autocomplete="off" />
+          <button type="submit" class="send-btn">Send</button>
+        </form>
+      </div>
+
+      <!-- Tool Calls -->
+      <div class="panel tool-panel">
+        <div class="panel-header">
+          <div class="panel-dot blue"></div>
+          <span>Tool Calls</span>
+          <span class="panel-tag">OBSERVABILITY</span>
+        </div>
+        <div class="tool-calls" id="toolCalls">
+          <div class="tool-empty">
+            <p>Tool calls and API responses appear here in real-time as the agent processes requests.</p>
+            <div class="tool-empty-features">
+              <div class="tef"><span class="tef-icon">🔐</span> Delegation enforcement</div>
+              <div class="tef"><span class="tef-icon">📊</span> Spending limit checks</div>
+              <div class="tef"><span class="tef-icon">🔁</span> Idempotency protection</div>
+              <div class="tef"><span class="tef-icon">⚠️</span> Duplicate detection</div>
+              <div class="tef"><span class="tef-icon">📝</span> Full audit logging</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ───── LEDGER VIEW ───── -->
+  <main id="view-ledger" class="view">
+    <div class="ledger-layout">
+      <div class="stats-row" id="statsRow"></div>
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot green"></div>
+          <span>Payment Ledger</span>
+          <span class="panel-tag">REAL-TIME</span>
+        </div>
+        <div class="ledger-table-wrap">
+          <table class="ledger-table">
+            <thead>
+              <tr><th>ID</th><th>Amount</th><th>Recipient</th><th>Memo</th><th>Status</th><th>Date</th></tr>
+            </thead>
+            <tbody id="ledgerBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ───── AUDIT VIEW ───── -->
+  <main id="view-audit" class="view">
+    <div class="audit-layout">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot purple"></div>
+          <span>Audit Trail</span>
+          <span class="panel-tag">COMPLIANCE</span>
+        </div>
+        <div class="audit-log" id="auditLog"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ───── SKILL VIEW ───── -->
+  <main id="view-skill" class="view">
+    <div class="skill-layout">
+      <div class="skill-hero">
+        <h1>Install this skill</h1>
+        <p>This is a real OpenClaw skill you can add to your assistant right now. <a href="/about">Read more about this project →</a></p>
+      </div>
+
+      <div class="skill-install">
+        <div class="terminal-bar">
+          <div class="terminal-dots">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          </div>
+          <span class="terminal-title">install</span>
+          <div class="terminal-spacer"></div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-text">openclaw skills add https://github.com/icerven/naturalclaw</span>
+          </div>
+          <div class="terminal-line output">
+            <span class="terminal-text dimmed">Installing natural-payments...</span>
+          </div>
+          <div class="terminal-line output">
+            <span class="terminal-text dimmed">Found SKILL.md with 5 tools</span>
+          </div>
+          <div class="terminal-line output">
+            <span class="terminal-text dimmed">✓ Installed.</span>
+          </div>
+          <div class="terminal-line" style="margin-top:8px;">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-text">/secrets set NATURAL_API_KEY sk_ntl_sandbox_your_key</span>
+          </div>
+          <div class="terminal-line output">
+            <span class="terminal-text dimmed">✓ Key stored. You can now use payment tools.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="eng-grid">
+        <div class="eng-card">
+          <div class="eng-num">⚡</div>
+          <h3>natural_pay</h3>
+          <p>Send a payment. Checks balance and limits first. Off-platform recipients get a claim link via email.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">💰</div>
+          <h3>natural_balance</h3>
+          <p>Check available funds for a delegated customer wallet.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">👥</div>
+          <h3>natural_customers</h3>
+          <p>List businesses that have granted the agent payment authority.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">📋</div>
+          <h3>natural_transactions</h3>
+          <p>View recent payment history with status, amounts, and recipients.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">🔍</div>
+          <h3>natural_payment_status</h3>
+          <p>Track a specific payment by ID. See if it's pending, claimed, or completed.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">🔒</div>
+          <h3>Delegation enforcement</h3>
+          <p>Per-transaction limits, daily limits, permission checks. All enforced before any payment executes.</p>
+        </div>
+      </div>
+
+      <div class="skill-code">
+        <div class="panel-header">
+          <div class="panel-dot green"></div>
+          <span>SKILL.md</span>
+        </div>
+        <pre class="skill-pre"><code>---
+name: natural-payments
+description: Give your assistant the ability to send
+  payments, check balances, and track transactions
+  through Natural's agentic payments infrastructure.
+metadata:
+  openclaw:
+    emoji: ⚡
+    primaryEnv: NATURAL_API_KEY
+    requires:
+      env: [NATURAL_API_KEY]
+      bins: [node]
+    homepage: https://natural.co
+---
+
+# Setup
+1. Get a key at natural.co/contact
+2. /secrets set NATURAL_API_KEY sk_ntl_sandbox_...
+
+## Tools
+- natural_pay — send a payment
+- natural_balance — check wallet balance
+- natural_customers — list delegated customers
+- natural_transactions — payment history
+- natural_payment_status — track a payment
+
+## Rules
+1. Confirm amount + recipient before sending
+2. Check balance before every payment
+3. Include a memo for every payment
+4. Report limits when blocked
+5. Tell user about claim links for new recipients</code></pre>
+      </div>
+
+      <div style="text-align:center; margin-top:32px;">
+        <p style="color:var(--text-d); font-size:13px;">No dependencies — uses Node 18+ built-in fetch. Just set your API key and go.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
