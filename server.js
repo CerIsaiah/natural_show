@@ -6,8 +6,10 @@ const { PaymentLedger } = require("./src/ledger");
 const app = express();
 const server = http.createServer(app);
 
-app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
+app.use(
+  express.static(path.join(__dirname, "public"), { index: false })
+);
 
 const ledger = new PaymentLedger();
 
@@ -340,12 +342,23 @@ app.get("/api/ledger", (_req, res) => {
   });
 });
 
+const aboutPath = path.join(__dirname, "public", "about.html");
+const demoPath = path.join(__dirname, "public", "index.html");
+
+app.get("/", (_req, res) => {
+  res.sendFile(aboutPath);
+});
+
 app.get("/about", (_req, res) => {
-  res.sendFile(path.join(__dirname, "public", "about.html"));
+  res.sendFile(aboutPath);
+});
+
+app.get("/demo", (_req, res) => {
+  res.sendFile(demoPath);
 });
 
 app.get("*", (_req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.redirect(302, "/");
 });
 
 const PORT = process.env.PORT || 3000;

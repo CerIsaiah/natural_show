@@ -27,7 +27,7 @@ This isn't a wrapper around an existing MCP server. It's a custom-built system:
 npm install && npm start
 ```
 
-Open http://localhost:3000 and type real payment commands:
+Open **http://localhost:3000** for the about page, or **http://localhost:3000/demo** for the interactive agent. On the demo, type real payment commands:
 
 - `Pay Terri $500 for the bathroom repair`
 - `Check my balance`
