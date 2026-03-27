@@ -1,241 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NaturalClaw — Agentic Payment Orchestration</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentPay — The Payment Layer for AI Agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="gradient-orb orb-1"></div>
-  <div class="gradient-orb orb-2"></div>
 
-  <!-- ───── HEADER ───── -->
-  <header class="topbar">
-    <div class="logo">
-      <div class="logo-mark">N</div>
-      <span>NaturalClaw</span>
-    </div>
-    <div class="topbar-tabs">
-      <button class="topbar-tab active" data-view="agent">Agent</button>
-      <button class="topbar-tab" data-view="ledger">Ledger</button>
-      <button class="topbar-tab" data-view="audit">Audit Trail</button>
-      <button class="topbar-tab" data-view="skill">Skill</button>
-    </div>
-    <div class="topbar-right">
-      <a href="/about" class="about-link">About Me</a>
-      <span class="env-badge">SANDBOX</span>
-    </div>
-  </header>
+  <!-- ── ABOUT ── (first screen) -->
+  <div id="s-about" class="screen active">
+    <div class="ab-noise"></div>
+    <div class="ab-orb ab-orb-1"></div>
+    <div class="ab-orb ab-orb-2"></div>
+    <div class="ab-wrap">
 
-  <!-- ───── AGENT VIEW ───── -->
-  <main id="view-agent" class="view active">
-    <div class="agent-layout">
-      <!-- Chat -->
-      <div class="panel chat-panel">
-        <div class="panel-header">
-          <div class="panel-dot green"></div>
-          <span>Payment Agent</span>
-          <span class="panel-tag">LIVE</span>
+      <nav class="ab-nav">
+        <div class="ab-logo-icon">
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <circle cx="16" cy="16" r="14" stroke="url(#ablg)" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="16" cy="16" r="4" fill="url(#ablg)"/>
+            <circle cx="16" cy="6" r="2" fill="#00d4ff" opacity="0.7"/>
+            <circle cx="24.5" cy="20" r="2" fill="#00ff88" opacity="0.7"/>
+            <circle cx="7.5" cy="20" r="2" fill="#ffb800" opacity="0.7"/>
+            <line x1="16" y1="12" x2="16" y2="8" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+            <line x1="19" y1="18" x2="22.5" y2="19.5" stroke="#00ff88" stroke-width="1" opacity="0.4"/>
+            <line x1="13" y1="18" x2="9.5" y2="19.5" stroke="#ffb800" stroke-width="1" opacity="0.4"/>
+            <defs><linearGradient id="ablg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#00d4ff"/><stop offset="1" stop-color="#00ff88"/></linearGradient></defs>
+          </svg>
         </div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="msg agent">
-            <div class="sender">Agent</div>
-            <div>I'm a payment agent. Type naturally — I'll figure out the rest.<br><br>
-            <strong>Try any of these:</strong><br>
-            <code>pay mike 200 for plumbing</code><br>
-            <code>send terri $500 for the bathroom repair</code><br>
-            <code>check my balance</code><br>
-            <code>show recent transactions</code><br>
-            <code>list my customers</code><br><br>
-            <span style="color:var(--text-d)">I parse natural language, extract amounts/recipients/memos, check balances, enforce spending limits, and log everything to an audit trail.</span></div>
-          </div>
+        <span class="ab-name">Control Loop</span>
+        <button id="btnAboutNav" class="ab-nav-cta">Launch Demo &#8594;</button>
+      </nav>
+
+      <h1 class="ab-h1">Hey, I'm <span class="ab-gr">Isaiah Cerven</span></h1>
+
+      <p class="ab-intro">
+        I put this site and demo together for <a href="https://natural.co" class="ab-link" target="_blank">Natural</a> as a concrete example of how I think about payments, agents, and shipping a usable front end.
+      </p>
+
+      <h2 class="ab-h2">About me</h2>
+      <p class="ab-p">I've been an entrepreneur for as long as I can remember. I've worked with agencies on <strong>B2B</strong> projects, and I built my own <strong>consumer startup</strong> and grew it to <strong>3,000+ users</strong>. That mix — selling to businesses, running a product people actually use — shaped how I think about product and execution.</p>
+      <p class="ab-p">For the past <strong>year</strong> I've been at <strong>Mastercard</strong>, in <strong>Networks clearing</strong>, where I work on <strong>end-to-end payment processing</strong> — how money actually moves through the network. Sitting in that world, what <a href="https://natural.co" class="ab-link" target="_blank">Natural</a> is building feels especially relevant: the same primitives I see every day (limits, risk, trust, settlement) are exactly what agentic payments need, just redesigned for software that acts on its own.</p>
+      <p class="ab-p"><strong>Control Loop</strong> is an interactive walkthrough: human path first, then a clearly labeled <strong>agent section</strong> for the same rails with software layers, narrated chapter by chapter. I built it so there is a single link to share instead of repeating the same deck.</p>
+
+      <h2 class="ab-h2">Why this matters for payments</h2>
+      <p class="ab-p">Networks and issuers already evaluate rich signals on each transaction. Software that initiates spend still needs clear authorization, safe retries, and a trail that Finance or compliance can reconstruct. The demo states those requirements side by side with the human path so the gap is visible.</p>
+
+      <h2 class="ab-h2">What I would prioritize and what I am still thinking through</h2>
+      <p class="ab-p">Based on <strong>Networks clearing</strong> at Mastercard. Working directions, not a product commitment.</p>
+      <ul class="ab-ideas">
+        <li><strong>Reconciliation artifacts, not only successful auth.</strong> I would want anything an agent emits to stay legible when batch files are matched days later. Still weighing what minimum field set belongs in clearing-grade output so agent spend does not leave orphan auths.</li>
+        <li><strong>Deterministic policy in front of probabilistic models.</strong> I would put repeatable rules in front of autonomous wallet spend so investigators get the same story on replay. The split between network scoring and issuer policy is something I would want explicit in any audit story.</li>
+        <li><strong>Data on the formal settlement path.</strong> I would push intent and policy references into what operations actually load, not parallel chat. Scheme messages stay cramped, so I am interested in whether richer rails—ISO 20022 is the usual example—could carry agent lineage without bolting shadow databases.</li>
+        <li><strong>Issuance aligned with policy.</strong> I would bind virtual PAN creation to the signed approval so caps do not drift from tickets. Whether issuers expose that as an API others can adopt, or it stays bespoke per program, is an industry-shape bet more than a solo call.</li>
+      </ul>
+
+      <div class="ab-card-grid">
+        <div class="ab-card">
+          <div class="ab-card-num">01</div>
+          <h4 class="ab-card-h4">Human path</h4>
+          <p class="ab-card-p">Walk-to-terminal animation, then the four-party diagram with auth versus settlement called out.</p>
         </div>
-        <form class="chat-input-area" id="chatForm">
-          <input type="text" id="chatInput" placeholder="Type a payment command..." autocomplete="off" />
-          <button type="submit" class="send-btn">Send</button>
-        </form>
+        <div class="ab-card">
+          <div class="ab-card-num">02</div>
+          <h4 class="ab-card-h4">Structured request</h4>
+          <p class="ab-card-p">JSON intent and idempotency so automated retries do not duplicate charges.</p>
+        </div>
+        <div class="ab-card">
+          <div class="ab-card-num">03</div>
+          <h4 class="ab-card-h4">Policy</h4>
+          <p class="ab-card-p">Ordered checks with pass or fail before anything is sent to the network.</p>
+        </div>
+        <div class="ab-card">
+          <div class="ab-card-num">04</div>
+          <h4 class="ab-card-h4">Audit linkage</h4>
+          <p class="ab-card-p">Intent, policy, and authorization chained for later review.</p>
+        </div>
       </div>
 
-      <!-- Tool Calls -->
-      <div class="panel tool-panel">
-        <div class="panel-header">
-          <div class="panel-dot blue"></div>
-          <span>Tool Calls</span>
-          <span class="panel-tag">OBSERVABILITY</span>
-        </div>
-        <div class="tool-calls" id="toolCalls">
-          <div class="tool-empty">
-            <p>Tool calls and API responses appear here in real-time as the agent processes requests.</p>
-            <div class="tool-empty-features">
-              <div class="tef"><span class="tef-icon">🔐</span> Delegation enforcement</div>
-              <div class="tef"><span class="tef-icon">📊</span> Spending limit checks</div>
-              <div class="tef"><span class="tef-icon">🔁</span> Idempotency protection</div>
-              <div class="tef"><span class="tef-icon">⚠️</span> Duplicate detection</div>
-              <div class="tef"><span class="tef-icon">📝</span> Full audit logging</div>
+      <button id="btnAboutCta" class="ab-cta">
+        Launch the Demo <span>&#8594;</span>
+      </button>
+
+      <p class="ab-footer">
+        Isaiah Cerven &middot; <a href="https://natural.co" class="ab-link" target="_blank">natural.co</a> &middot; <a href="https://github.com/CerIsaiah/natural_show" class="ab-link" target="_blank">GitHub</a>
+      </p>
+
+    </div>
+  </div>
+
+  <!-- ── LANDING ── -->
+  <div id="s-landing" class="screen">
+    <div class="landing-wrap">
+      <div class="ap-mark">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+          <rect x="3" y="3" width="46" height="46" rx="14" fill="rgba(0,212,255,0.07)" stroke="#00d4ff" stroke-width="1.5"/>
+          <rect x="13" y="29" width="10" height="14" rx="3" fill="#00d4ff" opacity="0.9"/>
+          <rect x="29" y="15" width="10" height="28" rx="3" fill="#00ff88" opacity="0.9"/>
+          <circle cx="18" cy="22" r="5" fill="#00d4ff" opacity="0.6"/>
+          <circle cx="34" cy="35" r="3" fill="#00ff88" opacity="0.5"/>
+        </svg>
+        <div class="ap-name">AgentPay</div>
+      </div>
+      <h1 class="l-headline">The Payment Layer<br><em>for AI Agents</em></h1>
+      <p class="l-sub">
+        The same card network sequence runs twice: first for a person at checkout, then in a dedicated <strong>agent section</strong> for software-initiated payment—structured intent, policy, scoped cards, and records.
+        The goal is to show what stays the same on the rails and what has to be added when something other than a human triggers the charge.
+      </p>
+      <button id="btnPlay" class="btn-play">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><polygon points="3,1 17,9 3,17"/></svg>
+        Watch the Demo
+      </button>
+      <div class="l-hint">Nine chapters · take your time</div>
+    </div>
+  </div>
+
+  <!-- ── DEMO: chapter stage ── -->
+  <div id="s-demo" class="screen">
+    <div class="ch-stage">
+
+      <!-- Crossfade overlay for scene transitions -->
+      <div class="ch-overlay" id="chOverlay"></div>
+
+      <!-- Top bar -->
+      <div class="ch-topbar">
+        <div class="ch-brand">AgentPay</div>
+        <div class="ch-label" id="chLabel"></div>
+        <div class="ch-dots" id="chDots"></div>
+        <button id="btnPause" class="ch-pause-btn" title="Pause / Resume">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><rect x="1" y="0.5" width="4" height="12" rx="1.2"/><rect x="8" y="0.5" width="4" height="12" rx="1.2"/></svg>
+        </button>
+      </div>
+
+      <!-- Scene area -->
+      <div class="ch-scene" id="chScene">
+
+        <!-- ── Layer A: Walk (sprites + terminal + floor) ── -->
+        <div class="scene-layer" id="layerWalk">
+
+          <!-- Terminal -->
+          <div class="terminal" id="terminal">
+            <div class="term-head">
+              <div class="term-screen">
+                <span class="term-text" id="termText">READY</span>
+                <span class="term-blink"></span>
+              </div>
+              <div class="term-brand">PAY</div>
+            </div>
+            <div class="term-body">
+              <div class="term-slot"><div class="slot-gap"></div></div>
+              <div class="term-pad">
+                <div class="tpad-row"><span class="tkey">1</span><span class="tkey">2</span><span class="tkey">3</span></div>
+                <div class="tpad-row"><span class="tkey">4</span><span class="tkey">5</span><span class="tkey">6</span></div>
+                <div class="tpad-row"><span class="tkey">7</span><span class="tkey">8</span><span class="tkey">9</span></div>
+                <div class="tpad-row"><span class="tkey red">✕</span><span class="tkey">0</span><span class="tkey grn">✓</span></div>
+              </div>
+            </div>
+            <div class="term-stand"></div>
+            <div class="term-base"></div>
+          </div>
+
+          <!-- Human sprite -->
+          <div class="sprite" id="sprHuman" style="left:-90px">
+            <div class="sprite-shadow"></div>
+            <svg class="spr-svg" width="44" height="68" viewBox="0 0 44 68" fill="none" overflow="visible">
+              <ellipse cx="22" cy="7" rx="10" ry="6.5" fill="#3d2007"/>
+              <circle cx="22" cy="11" r="9.5" fill="#ffcca0" stroke="#e8a870" stroke-width="1"/>
+              <ellipse cx="12.5" cy="11" rx="2" ry="2.5" fill="#ffcca0" stroke="#e8a870" stroke-width="0.8"/>
+              <ellipse cx="31.5" cy="11" rx="2" ry="2.5" fill="#ffcca0" stroke="#e8a870" stroke-width="0.8"/>
+              <circle cx="18.5" cy="10" r="1.8" fill="#2d1b00"/>
+              <circle cx="25.5" cy="10" r="1.8" fill="#2d1b00"/>
+              <circle cx="19" cy="9.5" r="0.6" fill="white"/>
+              <circle cx="26" cy="9.5" r="0.6" fill="white"/>
+              <path d="M18 14.5 Q22 18 26 14.5" stroke="#c27a40" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <rect x="19" y="20" width="6" height="5" fill="#ffcca0"/>
+              <rect x="10" y="24" width="24" height="22" rx="4" fill="#3b82f6"/>
+              <path d="M16 24 L22 31 L28 24" stroke="#2563eb" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+              <circle cx="22" cy="35" r="1.2" fill="rgba(255,255,255,0.3)"/>
+              <rect x="2" y="26" width="9" height="16" rx="4" fill="#3b82f6"/>
+              <ellipse cx="6.5" cy="42" rx="4" ry="3.5" fill="#ffcca0" stroke="#e8a870" stroke-width="0.8"/>
+              <rect x="33" y="26" width="9" height="16" rx="4" fill="#3b82f6"/>
+              <ellipse cx="37.5" cy="42" rx="4" ry="3.5" fill="#ffcca0" stroke="#e8a870" stroke-width="0.8"/>
+              <rect x="13" y="45" width="9" height="19" rx="4" fill="#1e3a5f" class="leg-l"/>
+              <rect x="22" y="45" width="9" height="19" rx="4" fill="#1e3a5f" class="leg-r"/>
+              <ellipse cx="17.5" cy="63" rx="7.5" ry="4" fill="#0f172a"/>
+              <ellipse cx="26.5" cy="63" rx="7.5" ry="4" fill="#0f172a"/>
+            </svg>
+            <div class="spr-label">Human</div>
+          </div>
+
+          <!-- Agent sprite -->
+          <div class="sprite hidden" id="sprAgent" style="left:-90px">
+            <div class="agent-aura" id="agentAura"></div>
+            <div class="sprite-shadow agent-shadow"></div>
+            <div class="card-vault" id="cardVault"></div>
+            <svg class="spr-svg" width="44" height="68" viewBox="0 -12 44 80" fill="none" overflow="visible">
+              <line x1="22" y1="-12" x2="22" y2="2" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="22" cy="-12" r="3.5" fill="#00d4ff"/>
+              <circle cx="22" cy="-12" r="6" fill="rgba(0,212,255,0.15)" class="ant-pulse"/>
+              <rect x="7" y="2" width="30" height="22" rx="8" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1.5"/>
+              <rect x="10" y="7" width="24" height="12" rx="4" fill="rgba(0,10,30,0.95)"/>
+              <rect x="12" y="10" width="8" height="5" rx="2" fill="#00d4ff" class="agt-eye-l"/>
+              <rect x="24" y="10" width="8" height="5" rx="2" fill="#00ff88" class="agt-eye-r"/>
+              <line x1="10" y1="14.5" x2="34" y2="14.5" stroke="rgba(0,212,255,0.2)" stroke-width="0.5"/>
+              <rect x="18" y="24" width="8" height="5" rx="2" fill="rgba(0,212,255,0.3)" stroke="#00d4ff" stroke-width="1"/>
+              <rect x="7" y="28" width="30" height="22" rx="5" fill="rgba(0,212,255,0.07)" stroke="#00d4ff" stroke-width="1.5"/>
+              <rect x="13" y="33" width="18" height="10" rx="3" fill="rgba(0,212,255,0.12)" stroke="rgba(0,212,255,0.35)" stroke-width="1"/>
+              <line x1="15" y1="36" x2="29" y2="36" stroke="rgba(0,212,255,0.45)" stroke-width="0.8"/>
+              <line x1="15" y1="39" x2="26" y2="39" stroke="rgba(0,212,255,0.3)" stroke-width="0.8"/>
+              <rect x="0" y="29" width="8" height="14" rx="3" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1"/>
+              <rect x="0" y="43" width="8" height="5" rx="2" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="0.8"/>
+              <rect x="36" y="29" width="8" height="14" rx="3" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1"/>
+              <rect x="36" y="43" width="8" height="5" rx="2" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="0.8"/>
+              <rect x="11" y="49" width="9" height="17" rx="4" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1.5" class="leg-l"/>
+              <rect x="24" y="49" width="9" height="17" rx="4" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1.5" class="leg-r"/>
+              <rect x="7" y="64" width="14" height="4" rx="2" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="1"/>
+              <rect x="23" y="64" width="14" height="4" rx="2" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="1"/>
+            </svg>
+            <div class="spr-label">AI Agent</div>
+          </div>
+
+          <!-- JSON intent card (A1 — floats in walk layer) -->
+          <div class="json-card" id="jsonCard">
+            <div class="jc-tag">INTENT OBJECT</div>
+            <div class="jc-code" id="jcCode"></div>
+          </div>
+
+          <!-- Floor -->
+          <div class="ch-floor">
+            <div class="floor-grid"></div>
+            <div class="floor-shine"></div>
+          </div>
+
+        </div><!-- /layerWalk -->
+
+        <!-- ── Layer B: Rail diagram (centered) ── -->
+        <div class="scene-layer scene-center" id="layerRail">
+          <div class="rail-diagram" id="railDiagram">
+
+            <div class="rd-title" id="rdTitle">Four-party authorization</div>
+
+            <!-- Agent control plane (shown only in agent rail chapter) -->
+            <div class="rail-control agent-only" id="railControl">
+              <div class="rail-cnode" data-cnode="intent"><div class="rail-cdot"></div><span>Intent</span></div>
+              <div class="rail-clink"></div>
+              <div class="rail-cnode" data-cnode="policy"><div class="rail-cdot"></div><span>Policy</span></div>
+              <div class="rail-clink"></div>
+              <div class="rail-cnode" data-cnode="vcard"><div class="rail-cdot"></div><span>vCard</span></div>
+            </div>
+            <div class="rail-beam agent-only" id="railBeam"></div>
+
+            <!-- Main four-party nodes -->
+            <div class="rail-main" id="railMain">
+              <div class="rail-node" data-node="pos">
+                <div class="rail-glyph rail-glyph-pos">
+                  <svg viewBox="0 0 40 44" width="52" height="58" fill="none">
+                    <rect x="6" y="6" width="28" height="26" rx="4" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="9" y="10" width="22" height="14" rx="2" fill="currentColor" opacity="0.15"/>
+                    <rect x="12" y="32" width="16" height="3" rx="1" fill="currentColor" opacity="0.4"/>
+                    <rect x="14" y="28" width="4" height="3" rx="1" fill="currentColor" opacity="0.3"/>
+                    <rect x="19" y="28" width="4" height="3" rx="1" fill="currentColor" opacity="0.3"/>
+                    <rect x="24" y="28" width="4" height="3" rx="1" fill="currentColor" opacity="0.3"/>
+                  </svg>
+                </div>
+                <span class="rail-lbl">Checkout</span>
+                <span class="rail-sub">Where the sale starts</span>
+              </div>
+
+              <div class="rail-conn" data-conn="0">
+                <div class="rail-line"></div>
+                <div class="rail-packet"></div>
+                <div class="rail-ptag">+ intent</div>
+              </div>
+
+              <div class="rail-node" data-node="acq">
+                <div class="rail-glyph rail-glyph-bank">
+                  <svg viewBox="0 0 44 42" width="52" height="50" fill="none">
+                    <path d="M4 36h36v4H4v-4Z" fill="currentColor" opacity="0.35"/>
+                    <path d="M8 20h6v16H8V20Zm11 0h6v16h-6V20Zm11 0h6v16h-6V20Z" fill="currentColor" opacity="0.45"/>
+                    <path d="M2 20 22 6l20 14v2H2v-2Z" fill="currentColor" opacity="0.2"/>
+                    <rect x="2" y="20" width="40" height="3" fill="currentColor" opacity="0.3"/>
+                  </svg>
+                </div>
+                <span class="rail-lbl">Acquirer</span>
+                <span class="rail-sub">Merchant's bank</span>
+              </div>
+
+              <div class="rail-conn" data-conn="1">
+                <div class="rail-line"></div>
+                <div class="rail-packet"></div>
+                <div class="rail-ptag">+ policy</div>
+              </div>
+
+              <div class="rail-node" data-node="net">
+                <div class="rail-glyph rail-glyph-net">
+                  <svg viewBox="0 0 44 44" width="52" height="52" fill="none">
+                    <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                    <circle cx="22" cy="22" r="11" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4" opacity="0.45"/>
+                    <path d="M22 4v36M4 22h36" stroke="currentColor" stroke-width="0.9" opacity="0.35"/>
+                    <circle cx="22" cy="22" r="3" fill="currentColor" opacity="0.6"/>
+                  </svg>
+                </div>
+                <span class="rail-lbl">Network</span>
+                <span class="rail-sub">Routes the message</span>
+              </div>
+
+              <div class="rail-conn" data-conn="2">
+                <div class="rail-line"></div>
+                <div class="rail-packet"></div>
+                <div class="rail-ptag">+ approval</div>
+              </div>
+
+              <div class="rail-node" data-node="iss">
+                <div class="rail-glyph rail-glyph-bank rail-glyph-iss">
+                  <svg viewBox="0 0 44 42" width="52" height="50" fill="none">
+                    <path d="M4 36h36v4H4v-4Z" fill="currentColor" opacity="0.35"/>
+                    <path d="M8 20h6v16H8V20Zm11 0h6v16h-6V20Zm11 0h6v16h-6V20Z" fill="currentColor" opacity="0.45"/>
+                    <path d="M2 20 22 6l20 14v2H2v-2Z" fill="currentColor" opacity="0.2"/>
+                    <rect x="2" y="20" width="40" height="3" fill="currentColor" opacity="0.3"/>
+                  </svg>
+                </div>
+                <span class="rail-lbl">Issuer</span>
+                <span class="rail-sub">Cardholder's bank</span>
+              </div>
+            </div>
+
+            <!-- Approval banner (H4) -->
+            <div class="rd-approval hidden" id="rdApproval">
+              <span class="rd-appr-check">✓</span>
+              <span class="rd-appr-text">APPROVED</span>
+              <span class="rd-appr-note">Authorization complete · settlement on batch schedule</span>
+            </div>
+
+          </div>
+        </div><!-- /layerRail -->
+
+        <!-- ── Layer C: Data scenes (policy, card, audit) ── -->
+        <div class="scene-layer scene-center" id="layerData">
+
+          <!-- Policy decision tree (A2) -->
+          <div class="policy-tree hidden" id="policyTree">
+            <div class="pt-hd">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="1" y="1" width="18" height="18" rx="4" stroke="#ffb800" stroke-width="1.3"/>
+                <line x1="5" y1="7" x2="15" y2="7" stroke="#ffb800" stroke-width="1.1"/>
+                <line x1="5" y1="10" x2="13" y2="10" stroke="#ffb800" stroke-width="1.1"/>
+                <line x1="5" y1="13" x2="15" y2="13" stroke="#ffb800" stroke-width="1.1"/>
+              </svg>
+              <span class="pt-hd-title">Policy Engine</span>
+              <span class="pt-hd-note">Deterministic checks before network submission</span>
+            </div>
+            <div class="pt-rules" id="ptRules"></div>
+            <div class="pt-verdict hidden" id="ptVerdict">
+              <span class="pt-verd-badge">ALLOW</span>
+              <code class="pt-verd-hash">policy digest (signed)</code>
             </div>
           </div>
+
+          <!-- Virtual card large view (A3) -->
+          <div class="vcard-scene hidden" id="vcardScene">
+            <div class="vc-big" id="vcBig">
+              <div class="vc-chip-big"></div>
+              <div class="vc-name-big">scoped_vendor_card</div>
+              <div class="vc-num-big">&bull;&bull;&bull;&bull; &nbsp; &bull;&bull;&bull;&bull; &nbsp; &bull;&bull;&bull;&bull;</div>
+              <div class="vc-net-big">AgentPay Virtual</div>
+              <div class="vc-locks" id="vcLocks"></div>
+            </div>
+          </div>
+
+          <!-- Audit chain (A5) -->
+          <div class="audit-chain hidden" id="auditChain">
+            <div class="ac-title">Linked audit record</div>
+            <div class="ac-blocks" id="acBlocks"></div>
+          </div>
+
+        </div><!-- /layerData -->
+
+        <!-- Time badge (overlay on scene) -->
+        <div class="ch-time-badge hidden" id="chTimeBadge"></div>
+
+        <!-- Pause overlay -->
+        <div class="pause-overlay" id="pauseOverlay">
+          <div class="pause-badge">⏸ PAUSED — click anywhere or press Space to resume</div>
         </div>
+
+      </div><!-- /ch-scene -->
+
+      <!-- Caption strip (always visible, text changes per chapter) -->
+      <div class="ch-caption">
+        <div class="ch-cap-eyebrow" id="chCapEyebrow"></div>
+        <div class="ch-cap-title" id="chCapTitle"></div>
+        <div class="ch-cap-body" id="chCapBody"></div>
       </div>
+
     </div>
-  </main>
+  </div>
 
-  <!-- ───── LEDGER VIEW ───── -->
-  <main id="view-ledger" class="view">
-    <div class="ledger-layout">
-      <div class="stats-row" id="statsRow"></div>
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-dot green"></div>
-          <span>Payment Ledger</span>
-          <span class="panel-tag">REAL-TIME</span>
-        </div>
-        <div class="ledger-table-wrap">
-          <table class="ledger-table">
-            <thead>
-              <tr><th>ID</th><th>Amount</th><th>Recipient</th><th>Memo</th><th>Status</th><th>Date</th></tr>
-            </thead>
-            <tbody id="ledgerBody"></tbody>
-          </table>
-        </div>
-      </div>
+  <!-- ── BRIDGE ── -->
+  <div id="s-bridge" class="screen">
+    <div class="bridge-wrap">
+      <div class="bridge-ornament"></div>
+      <div class="bridge-q" id="bridgeQ"></div>
+      <div class="bridge-ans" id="bridgeAns"></div>
     </div>
-  </main>
+  </div>
 
-  <!-- ───── AUDIT VIEW ───── -->
-  <main id="view-audit" class="view">
-    <div class="audit-layout">
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-dot purple"></div>
-          <span>Audit Trail</span>
-          <span class="panel-tag">COMPLIANCE</span>
-        </div>
-        <div class="audit-log" id="auditLog"></div>
+  <!-- ── OUTRO ── -->
+  <div id="s-outro" class="screen">
+    <div class="outro-wrap">
+      <div class="outro-hd">
+        <div class="outro-logo">AgentPay</div>
+        <div class="outro-tagline">The payment layer for the agentic era</div>
       </div>
+      <div class="outro-compare">
+        <div class="outro-side human-side" id="oHuman">
+          <div class="os-head amber"><div class="os-dot"></div><span>Human</span></div>
+          <div class="os-time">Slower</div>
+          <div class="os-rows">
+            <div class="os-row"><span>Rails visibility</span><span class="os-val neg">Opaque</span></div>
+            <div class="os-row"><span>Card controls</span><span class="os-val neg">Physical only</span></div>
+            <div class="os-row"><span>Policy enforcement</span><span class="os-val neg">Manual, informal</span></div>
+            <div class="os-row"><span>Idempotency</span><span class="os-val neg">Ad hoc</span></div>
+            <div class="os-row"><span>Audit trail</span><span class="os-val neg">Fragmented</span></div>
+            <div class="os-row"><span>Settlement</span><span class="os-val neg">Batch / later</span></div>
+          </div>
+        </div>
+        <div class="outro-vs"><span>VS</span></div>
+        <div class="outro-side agent-side" id="oAgent">
+          <div class="os-head cyan"><div class="os-dot"></div><span>AI Agent</span></div>
+          <div class="os-time cyan">Faster</div>
+          <div class="os-rows">
+            <div class="os-row"><span>Rails visibility</span><span class="os-val pos">Instrumented</span></div>
+            <div class="os-row"><span>Card controls</span><span class="os-val pos">Issuer-scoped vPAN</span></div>
+            <div class="os-row"><span>Policy enforcement</span><span class="os-val pos">Deterministic engine</span></div>
+            <div class="os-row"><span>Idempotency</span><span class="os-val pos">Replay-safe keys</span></div>
+            <div class="os-row"><span>Audit trail</span><span class="os-val pos">Hash-linked chain</span></div>
+            <div class="os-row"><span>Settlement</span><span class="os-val pos">Still batch / later</span></div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-replay" id="btnReplay">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7a6 6 0 0110.4-3.5M13 7a6 6 0 01-10.4 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="11,1 12.5,4.5 9,4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Watch Again
+      </button>
     </div>
-  </main>
-
-  <!-- ───── SKILL VIEW ───── -->
-  <main id="view-skill" class="view">
-    <div class="skill-layout">
-      <div class="skill-hero">
-        <h1>Install this skill</h1>
-        <p>This is a real OpenClaw skill you can add to your assistant right now. <a href="/about">Read more about this project →</a></p>
-      </div>
-
-      <div class="skill-install">
-        <div class="terminal-bar">
-          <div class="terminal-dots">
-            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-          </div>
-          <span class="terminal-title">install</span>
-          <div class="terminal-spacer"></div>
-        </div>
-        <div class="terminal-body">
-          <div class="terminal-line">
-            <span class="terminal-prompt">$</span>
-            <span class="terminal-text">openclaw skills add https://github.com/CerIsaiah/natural_show</span>
-          </div>
-          <div class="terminal-line output">
-            <span class="terminal-text dimmed">Installing natural-payments...</span>
-          </div>
-          <div class="terminal-line output">
-            <span class="terminal-text dimmed">Found SKILL.md with 5 tools</span>
-          </div>
-          <div class="terminal-line output">
-            <span class="terminal-text dimmed">✓ Installed.</span>
-          </div>
-          <div class="terminal-line" style="margin-top:8px;">
-            <span class="terminal-prompt">$</span>
-            <span class="terminal-text">/secrets set NATURAL_API_KEY sk_ntl_sandbox_your_key</span>
-          </div>
-          <div class="terminal-line output">
-            <span class="terminal-text dimmed">✓ Key stored. You can now use payment tools.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="eng-grid">
-        <div class="eng-card">
-          <div class="eng-num">⚡</div>
-          <h3>natural_pay</h3>
-          <p>Send a payment. Checks balance and limits first. Off-platform recipients get a claim link via email.</p>
-        </div>
-        <div class="eng-card">
-          <div class="eng-num">💰</div>
-          <h3>natural_balance</h3>
-          <p>Check available funds for a delegated customer wallet.</p>
-        </div>
-        <div class="eng-card">
-          <div class="eng-num">👥</div>
-          <h3>natural_customers</h3>
-          <p>List businesses that have granted the agent payment authority.</p>
-        </div>
-        <div class="eng-card">
-          <div class="eng-num">📋</div>
-          <h3>natural_transactions</h3>
-          <p>View recent payment history with status, amounts, and recipients.</p>
-        </div>
-        <div class="eng-card">
-          <div class="eng-num">🔍</div>
-          <h3>natural_payment_status</h3>
-          <p>Track a specific payment by ID. See if it's pending, claimed, or completed.</p>
-        </div>
-        <div class="eng-card">
-          <div class="eng-num">🔒</div>
-          <h3>Delegation enforcement</h3>
-          <p>Per-transaction limits, daily limits, permission checks. All enforced before any payment executes.</p>
-        </div>
-      </div>
-
-      <div class="skill-code">
-        <div class="panel-header">
-          <div class="panel-dot green"></div>
-          <span>SKILL.md</span>
-        </div>
-        <pre class="skill-pre"><code>---
-name: natural-payments
-description: Give your assistant the ability to send
-  payments, check balances, and track transactions
-  through Natural's agentic payments infrastructure.
-metadata:
-  openclaw:
-    emoji: ⚡
-    primaryEnv: NATURAL_API_KEY
-    requires:
-      env: [NATURAL_API_KEY]
-      bins: [node]
-    homepage: https://natural.co
----
-
-# Setup
-1. Get a key at natural.co/contact
-2. /secrets set NATURAL_API_KEY sk_ntl_sandbox_...
-
-## Tools
-- natural_pay — send a payment
-- natural_balance — check wallet balance
-- natural_customers — list delegated customers
-- natural_transactions — payment history
-- natural_payment_status — track a payment
-
-## Rules
-1. Confirm amount + recipient before sending
-2. Check balance before every payment
-3. Include a memo for every payment
-4. Report limits when blocked
-5. Tell user about claim links for new recipients</code></pre>
-      </div>
-
-      <div style="text-align:center; margin-top:32px;">
-        <p style="color:var(--text-d); font-size:13px;">No dependencies — uses Node 18+ built-in fetch. Just set your API key and go.</p>
-      </div>
-    </div>
-  </main>
+  </div>
 
   <script src="/app.js"></script>
 </body>

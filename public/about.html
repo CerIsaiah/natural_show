@@ -3,159 +3,189 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Isaiah Cerven — Natural + OpenClaw</title>
+  <title>Isaiah Cerven — Control Loop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #050507; --bg-el: #0c0c10; --bg-card: #111116; --border: #1e1e26;
-      --text: #f4f4f5; --text-m: #a1a1aa; --text-d: #63637a;
-      --green: #22c55e; --blue: #3b82f6; --purple: #a855f7;
+      --bg: #05050a; --bg-el: rgba(255,255,255,0.03); --bg-card: rgba(255,255,255,0.045);
+      --border: rgba(255,255,255,0.06); --border-hover: rgba(255,255,255,0.12);
+      --text: #eeeef0; --text-m: #8a8a9a; --text-d: #4a4a5a;
+      --cyan: #00d4ff; --green: #00ff88; --amber: #ffb800; --red: #ff3366;
+      --cyan-glow: rgba(0,212,255,0.15); --green-glow: rgba(0,255,136,0.15);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; }
-    a { color:var(--green); text-decoration:none; }
+    body {
+      font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color:var(--text);
+      line-height:1.7; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    a { color:var(--cyan); text-decoration:none; }
     a:hover { text-decoration:underline; }
     code { font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg-card); padding:2px 6px; border-radius:4px; border:1px solid var(--border); }
-    .wrap { max-width:700px; margin:0 auto; padding:60px 24px 80px; }
+
+    .noise {
+      position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.025;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:200px;
+    }
+    .orb { position:fixed; border-radius:50%; filter:blur(140px); pointer-events:none; z-index:0; }
+    .orb-1 { top:-15%; left:-5%; width:500px; height:500px; background:rgba(0,212,255,0.04); }
+    .orb-2 { bottom:-10%; right:-5%; width:400px; height:400px; background:rgba(0,255,136,0.03); }
+
+    .wrap { max-width:700px; margin:0 auto; padding:60px 24px 80px; position:relative; z-index:1; }
+
     nav { display:flex; align-items:center; gap:12px; margin-bottom:56px; }
-    nav .logo-mark { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,var(--green),var(--blue)); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:#000; }
-    nav span { font-weight:600; font-size:15px; }
-    nav .right { margin-left:auto; font-size:13px; padding:6px 16px; border:1px solid var(--border); border-radius:8px; color:var(--text-m); }
-    nav .right:hover { border-color:var(--green); color:var(--green); text-decoration:none; }
-    h1 { font-size:36px; font-weight:800; letter-spacing:-0.03em; line-height:1.2; margin-bottom:24px; }
-    h1 .gr { background:linear-gradient(135deg,var(--green),var(--blue)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .logo-icon { width:32px; height:32px; }
+    .logo-icon svg { width:100%; height:100%; }
+    nav .name { font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; letter-spacing:-0.02em; }
+    nav .right {
+      margin-left:auto; font-size:12px; font-weight:500; padding:7px 18px;
+      border:1px solid var(--border); border-radius:100px; color:var(--text-m);
+      transition:all 0.2s;
+    }
+    nav .right:hover { border-color:var(--cyan); color:var(--cyan); text-decoration:none; box-shadow:0 0 16px var(--cyan-glow); }
+
+    h1 { font-family:'Space Grotesk',sans-serif; font-size:38px; font-weight:700; letter-spacing:-0.03em; line-height:1.15; margin-bottom:24px; }
+    h1 .gr { background:linear-gradient(135deg,var(--cyan),var(--green)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
     .intro { font-size:17px; color:var(--text-m); margin-bottom:40px; line-height:1.8; }
     .intro strong { color:var(--text); }
-    h2 { font-size:20px; font-weight:700; letter-spacing:-0.01em; margin:44px 0 14px; }
+
+    h2 { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:600; letter-spacing:-0.01em; margin:44px 0 14px; }
+
     p, li { color:var(--text-m); font-size:15px; margin-bottom:12px; }
     ul { padding-left:20px; }
     li { margin-bottom:10px; }
     li strong { color:var(--text); }
+
     .divider { border:none; border-top:1px solid var(--border); margin:44px 0; }
-    .terminal { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:20px 0; }
-    .terminal-bar { display:flex; align-items:center; padding:10px 14px; background:var(--bg-el); border-bottom:1px solid var(--border); gap:6px; }
+
+    .terminal {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:14px;
+      overflow:hidden; margin:20px 0; backdrop-filter:blur(12px);
+    }
+    .terminal-bar { display:flex; align-items:center; padding:10px 14px; background:rgba(255,255,255,0.02); border-bottom:1px solid var(--border); gap:6px; }
     .dot { width:9px; height:9px; border-radius:50%; }
     .dot.r { background:#ff5f57; } .dot.y { background:#febc2e; } .dot.g { background:#28c840; }
     .terminal pre { padding:14px 18px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.8; color:var(--text-m); overflow-x:auto; }
-    .terminal .pr { color:var(--green); }
+    .terminal .pr { color:var(--cyan); }
     .terminal .dm { color:var(--text-d); }
     .terminal .hl { color:var(--text); }
+
     .card-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0 28px; }
-    .card { background:var(--bg-el); border:1px solid var(--border); border-radius:12px; padding:20px; }
-    .card .num { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--green); font-weight:600; margin-bottom:6px; }
-    .card h4 { font-size:14px; font-weight:600; margin-bottom:6px; }
+    .card {
+      background:var(--bg-el); border:1px solid var(--border); border-radius:14px; padding:22px;
+      backdrop-filter:blur(12px); transition:border-color 0.2s;
+    }
+    .card:hover { border-color:var(--border-hover); }
+    .card .num { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--cyan); font-weight:600; margin-bottom:6px; }
+    .card h4 { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; margin-bottom:6px; }
     .card p { font-size:13px; margin-bottom:0; }
-    .cta { display:inline-block; margin-top:20px; padding:12px 28px; background:var(--green); color:#000; font-weight:700; font-size:14px; border-radius:10px; }
-    .cta:hover { opacity:0.9; text-decoration:none; }
+
+    .cta {
+      display:inline-flex; align-items:center; gap:8px; margin-top:20px; padding:13px 32px;
+      background:linear-gradient(135deg,var(--cyan),var(--green)); color:#000; font-weight:700; font-size:14px;
+      border-radius:100px; transition:all 0.2s;
+    }
+    .cta:hover { opacity:0.9; text-decoration:none; box-shadow:0 0 24px var(--cyan-glow); }
+
     .footer { color:var(--text-d); font-size:13px; text-align:center; margin-top:48px; }
-    @media(max-width:600px) { h1 { font-size:26px; } .card-grid { grid-template-columns:1fr; } }
+    .footer a { color:var(--text-d); }
+    .footer a:hover { color:var(--cyan); }
+
+    .ideas-list { list-style:none; padding:0; margin:20px 0 32px; border-left:2px solid rgba(0,212,255,0.35); padding-left:16px; }
+    .ideas-list li { font-size:14px; color:var(--text-m); margin-bottom:14px; line-height:1.7; }
+    .ideas-list li strong { color:var(--text); font-weight:600; }
+
+    @media(max-width:600px) { h1 { font-size:28px; } .card-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
+<div class="noise"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
 <div class="wrap">
   <nav>
-    <div class="logo-mark">N</div>
-    <span>NaturalClaw</span>
-    <a href="/demo" class="right">Try the Demo →</a>
+    <div class="logo-icon">
+      <svg viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="url(#lg)" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="16" cy="16" r="4" fill="url(#lg)"/>
+        <circle cx="16" cy="6" r="2" fill="#00d4ff" opacity="0.7"/>
+        <circle cx="24.5" cy="20" r="2" fill="#00ff88" opacity="0.7"/>
+        <circle cx="7.5" cy="20" r="2" fill="#ffb800" opacity="0.7"/>
+        <line x1="16" y1="12" x2="16" y2="8" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+        <line x1="19" y1="18" x2="22.5" y2="19.5" stroke="#00ff88" stroke-width="1" opacity="0.4"/>
+        <line x1="13" y1="18" x2="9.5" y2="19.5" stroke="#ffb800" stroke-width="1" opacity="0.4"/>
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#00d4ff"/><stop offset="1" stop-color="#00ff88"/></linearGradient></defs>
+      </svg>
+    </div>
+    <span class="name">Control Loop</span>
+    <a href="/demo" class="right">Launch Demo &#8594;</a>
   </nav>
 
   <h1>Hey, I'm <span class="gr">Isaiah Cerven</span></h1>
 
   <div class="intro">
-    I'm a developer who cares about payments, agents, and shipping real things. I put this site together for <a href="https://natural.co">Natural</a> — to show what I can build and why I'd love to be part of what you're doing.
+    This page and <a href="/demo">the demo</a> are something I built for <a href="https://natural.co">Natural</a> to show how I think about payments, agents, and shipping a usable interface.
   </div>
 
   <h2>About me</h2>
   <p>I've been an entrepreneur for as long as I can remember. I've worked with agencies on <strong>B2B</strong> projects, and I built my own <strong>consumer startup</strong> and grew it to <strong>3,000+ users</strong>. That mix — selling to businesses, running a product people actually use — shaped how I think about product and execution.</p>
   <p>For the past <strong>year</strong> I've been at <strong>Mastercard</strong>, in <strong>Networks clearing</strong>, where I work on <strong>end-to-end payment processing</strong> — how money actually moves through the network. Sitting in that world, what <a href="https://natural.co">Natural</a> is building feels especially relevant: the same primitives I see every day (limits, risk, trust, settlement) are exactly what agentic payments need, just redesigned for software that acts on its own.</p>
-  <p>I built <strong>NaturalClaw</strong> because I wanted something concrete — not a pitch deck — that shows my passion for what Natural can unlock and why, as a developer, <strong>I'd love to be involved</strong> with the company.</p>
+  <p><strong>Control Loop</strong> is the interactive walkthrough on <a href="/demo">/demo</a>: human checkout first, then a labeled <strong>agent section</strong> on the same rails, with narration per chapter so there is a stable link to share.</p>
 
   <h2>OpenClaw</h2>
-  <p>I've been using <strong>OpenClaw</strong> a lot lately: as a generator for <strong>marketing</strong>, for <strong>creating videos</strong>, and for experimenting with <strong>UGC</strong> and creative workflows. I'm comfortable living in that ecosystem, which is why a Natural payment skill for OpenClaw felt like the right shape for this demo — something people can actually install and use.</p>
+  <p>I have been using <strong>OpenClaw</strong> for marketing drafts, video workflows, and UGC experiments. A Natural-facing payment integration in that environment is a concrete shape of demo I would also be interested in building.</p>
 
   <h2>What this project is</h2>
-  <p>This is my take on <strong>how OpenClaw and Natural fit together</strong>. OpenClaw already runs a lot of real assistant workflows — but moving money is still a gap for most setups. Natural is the infrastructure that closes it, with delegation, limits, and compliance built in. The flow here is: <strong>natural language → tool calls → balance checks → payment</strong>, with a ledger and audit trail so you can see the whole story.</p>
-  <p>It has two layers: an <strong>installable OpenClaw skill</strong> (real <code>SKILL.md</code>, real tool handlers against Natural's API) and a <strong>live web demo</strong> so anyone can try the agent flow without a key.</p>
+  <p>Use <a href="/demo">Launch Demo</a> for a chapter-based animation: human flow first, then agent flow with structured intent, policy, virtual issuance, instrumented rails, and linked records. You can pause at any point.</p>
 
   <div class="card-grid">
     <div class="card">
       <div class="num">01</div>
-      <h4>OpenClaw Payment Skill</h4>
-      <p>An installable skill that connects any OpenClaw assistant to Natural's payment API. 5 tools, proper SKILL.md format, zero dependencies. Set a key and go.</p>
+      <h4>Human path</h4>
+      <p>Checkout animation and four-party diagram with authorization versus settlement explained.</p>
     </div>
     <div class="card">
       <div class="num">02</div>
-      <h4>Live Agent Demo</h4>
-      <p>An interactive agent you can chat with — real-time tool calls, a live ledger, and a full audit trail. Shows the payment flow from natural language to execution.</p>
+      <h4>Structured request</h4>
+      <p>JSON intent and idempotency for safe automated retries.</p>
     </div>
     <div class="card">
       <div class="num">03</div>
-      <h4>Payment Orchestration Engine</h4>
-      <p>A custom-built ledger with delegation enforcement, per-transaction and daily spending limits, idempotency, and duplicate detection. Built from scratch.</p>
+      <h4>Policy</h4>
+      <p>Ordered checks that complete before network submission.</p>
     </div>
     <div class="card">
       <div class="num">04</div>
-      <h4>Agent Tool Interface</h4>
-      <p>Natural language parsing that extracts amounts, recipients, and memos from messy input. The agent decides which tools to call and in what order.</p>
+      <h4>Audit linkage</h4>
+      <p>Intent, policy, and auth linked for later review.</p>
     </div>
   </div>
 
-  <h2>How the agent flow works</h2>
-  <p>This is what I think the payment UX should look like when agents are the interface:</p>
+  <h2>Why this matters for payments</h2>
+  <p>Card networks already carry detailed transaction data. Software that pays on its own must still document authorization, handle idempotent retries, and support reconstruction for operations or compliance. The demo presents those requirements next to the human path so the delta is explicit.</p>
 
-  <div class="terminal">
-    <div class="terminal-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
-    <pre><span class="hl">User:</span>  pay terri 500 for fixing the bathroom sink
-
-<span class="hl">Agent:</span> <span class="dm">→ Checking balance for Bruce Property Management...</span>
-       <span class="dm">→ Balance: $12,500.00 available</span>
-       <span class="dm">→ Sending $500 to terri@plumbingworks.com...</span>
-       <span class="dm">→ Payment created: pay_a8f3k2m1 (PENDING)</span>
-
-       <span class="pr">✓ Sent $500.00 to Terri</span>
-       <span class="pr">  Memo: fixing the bathroom sink</span>
-       <span class="pr">  Status: PENDING</span>
-
-<span class="hl">User:</span>  pay terri 500 for the bathroom again
-
-<span class="hl">Agent:</span> <span class="dm">→ ⚠️ Duplicate detected: similar payment to Terri in the last hour</span>
-       <span class="dm">→ Proceeding with warning...</span>
-
-<span class="hl">User:</span>  pay jake 10000 for the full rewire
-
-<span class="hl">Agent:</span> <span class="dm">→ ❌ Blocked: $10,000 exceeds per-transaction limit ($5,000)</span>
-       <span class="dm">→ Payment not sent. Ask the business to raise the limit.</span></pre>
-  </div>
-
-  <p>The agent checks balance before sending, enforces spending limits, flags likely duplicates, and returns clear status. Everything is logged — the kind of observability you'd want for real money movement.</p>
-
-  <h2>You can use this in OpenClaw today</h2>
-  <p>If you run OpenClaw, add the skill and set your Natural API key — it talks to <code>api.natural.co</code> with the right JSON:API shape and idempotency headers:</p>
-
-  <div class="terminal">
-    <div class="terminal-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
-    <pre><span class="pr">$</span> openclaw skills add https://github.com/CerIsaiah/natural_show
-
-<span class="dm">Installing natural-payments...</span>
-<span class="dm">Found SKILL.md with 5 tools</span>
-<span class="dm">✓ Installed.</span>
-
-<span class="pr">$</span> /secrets set NATURAL_API_KEY sk_ntl_sandbox_your_key</pre>
-  </div>
-
-  <p>The handlers use Node's built-in <code>fetch</code> — no extra dependencies. With a valid key, you're on the real API.</p>
+  <h2>What I would prioritize and what I am still thinking through</h2>
+  <p>Based on <strong>Networks clearing</strong> at Mastercard. Working directions, not a product commitment.</p>
+  <ul class="ideas-list">
+    <li><strong>Reconciliation artifacts, not only successful auth.</strong> I would want anything an agent emits to stay legible when batch files are matched days later. Still weighing what minimum field set belongs in clearing-grade output so agent spend does not leave orphan auths.</li>
+    <li><strong>Deterministic policy in front of probabilistic models.</strong> I would put repeatable rules in front of autonomous wallet spend so investigators get the same story on replay. The split between network scoring and issuer policy is something I would want explicit in any audit story.</li>
+    <li><strong>Data on the formal settlement path.</strong> I would push intent and policy references into what operations actually load, not parallel chat. Scheme messages stay cramped, so I am interested in whether richer rails—ISO 20022 is the usual example—could carry agent lineage without bolting shadow databases.</li>
+    <li><strong>Issuance aligned with policy.</strong> I would bind virtual PAN creation to the signed approval so caps do not drift from tickets. Whether issuers expose that as an API others can adopt, or it stays bespoke per program, is an industry-shape bet more than a solo call.</li>
+  </ul>
 
   <hr class="divider" />
 
   <h2>I'd love to talk</h2>
-  <p>If you're hiring and want someone who combines <strong>payments depth</strong> (network clearing, how processing actually works) with an <strong>agentic / AI-focused</strong> mindset and a habit of <strong>shipping</strong>, I'd be excited to have a conversation. This project is my way of starting that dialogue — not with slides, but with something you can click through and install.</p>
+  <p>If you are hiring and want someone with clearing-side exposure and front-end work like this demo, I would welcome a conversation.</p>
 
-  <a href="/demo" class="cta">Try the Live Demo</a>
+  <a href="/demo" class="cta">Launch the Demo <span>&#8594;</span></a>
 
   <p class="footer">
-    Isaiah Cerven · <a href="/demo">Demo</a> · <a href="https://natural.co">natural.co</a> · <a href="https://github.com/CerIsaiah/natural_show">GitHub</a>
+    Isaiah Cerven &middot; <a href="/demo">Demo</a> &middot; <a href="https://natural.co">natural.co</a> &middot; <a href="https://github.com/CerIsaiah/natural_show">GitHub</a>
   </p>
 </div>
 </body>

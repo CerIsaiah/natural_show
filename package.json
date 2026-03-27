@@ -1,7 +1,7 @@
 {
-  "name": "naturalclaw",
+  "name": "control-loop",
   "version": "1.0.0",
-  "description": "Agentic payments for OpenClaw via Natural — give any AI assistant the power to move money",
+  "description": "Interactive demo: Agent vs Human decision architecture for high-stakes payments",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,6 +10,6 @@
   "dependencies": {
     "express": "^4.21.0"
   },
-  "keywords": ["natural", "openclaw", "agentic-payments", "mcp", "ai-agents"],
+  "keywords": ["agent", "payments", "demo", "interactive", "control-loop"],
   "license": "MIT"
 }
